@@ -22,6 +22,16 @@ final floraGradient = LinearGradient(
   ],
 );
 
+final faunaGradient = LinearGradient(
+  stops: List.generate(2, (index) => index * 0.5),
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [
+    Color.fromARGB(255, 255, 212, 212),
+    Color.fromARGB(255, 241, 241, 241)
+  ],
+);
+
 final survivalGradient = LinearGradient(
   stops: List.generate(2, (index) => index * 1),
   begin: Alignment.topRight,
