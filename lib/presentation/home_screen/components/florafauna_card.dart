@@ -1,18 +1,20 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:app_io/data/models/entity_model.dart';
 import 'package:app_io/scheme/colorscheme.dart';
+import 'package:app_io/utils/string_extension.dart';
 import 'package:flutter/material.dart';
 
 class FloraFaunaCard extends StatelessWidget {
-  final String title;
-  final String description;
+  final String type;
+  final EntityModel model;
   final Image asset;
 
   const FloraFaunaCard(
       {super.key,
       required this.asset,
-      required this.description,
-      required this.title});
+      required this.model,
+      required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +48,17 @@ class FloraFaunaCard extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Text(
-            title,
+            model.name!.capitalize(),
             style: TextStyle(
                 fontSize: 14, color: darkBlue, fontWeight: FontWeight.w600),
           ),
-          Text("Flora", style: TextStyle(fontSize: 12, color: green)),
+          Text(type.capitalize(),
+              style: TextStyle(
+                  fontSize: 12, color: type == 'fauna' ? red : green)),
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Text(description,
+              child: Text(model.description!,
                   style: TextStyle(
                       fontSize: 10, fontWeight: FontWeight.w400, color: grey)),
             ),

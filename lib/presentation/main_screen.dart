@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:animations/animations.dart';
+import 'package:app_io/data/api/apiprovider.dart';
 import 'package:app_io/logic/cubit/fauna_search_cubit.dart';
 import 'package:app_io/logic/cubit/firebase_cubit.dart';
 import 'package:app_io/logic/cubit/flora_search_cubit.dart';
+import 'package:app_io/logic/cubit/upload_cubit.dart';
 import 'package:app_io/presentation/contribute_screen/contribute_screen.dart';
 import 'package:app_io/presentation/flora_fauna_screen/fauna_screen.dart';
 import 'package:app_io/presentation/flora_fauna_screen/flora_screen.dart';
@@ -32,7 +34,10 @@ class _MainScreenState extends State<MainScreen> {
       create: (__) => FaunaSearchCubit(__.read<FirestoreCubit>()),
       child: FaunaScreen(),
     ),
-    ContributeScreen()
+    BlocProvider(
+      create: (context) => UploadCubit(ApiProvider()),
+      child: ContributeScreen(),
+    )
   ];
   final List _backgroundColor = [
     backgroundGradient,

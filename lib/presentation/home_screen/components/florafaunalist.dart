@@ -16,8 +16,10 @@ final floraFaunaList = BlocBuilder<FirestoreCubit, FirebaseCubitState>(
             scrollDirection: Axis.horizontal,
             itemCount: combined.length,
             itemBuilder: (context, index) => FloraFaunaCard(
-                title: combined[index].name!,
-                description: combined[index].description!,
+                model: combined[index],
+                type: state.faunaList.contains(combined[index])
+                    ? 'fauna'
+                    : 'flora',
                 asset: Image.asset('assets/cactus.png'))),
       );
     } else {

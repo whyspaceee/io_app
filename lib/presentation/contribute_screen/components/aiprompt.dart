@@ -1,9 +1,12 @@
 import 'dart:ui';
 
+import 'package:app_io/logic/cubit/upload_cubit.dart';
 import 'package:app_io/scheme/colorscheme.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AIPrompt extends StatefulWidget {
   const AIPrompt({super.key});
@@ -22,14 +25,54 @@ class _AIPromptState extends State<AIPrompt> {
       child: Stack(
         alignment: AlignmentDirectional.bottomCenter,
         children: [
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                    image: AssetImage('assets/flowers.jpeg'),
-                    fit: BoxFit.cover),
-                color: yellow),
-            height: 220,
+          BlocBuilder<UploadCubit, UploadState>(
+            builder: (context, state) {
+              if (state.status == Status.initial) {
+                return Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: DecorationImage(
+                          image: AssetImage('assets/flowers.jpeg'),
+                          fit: BoxFit.cover),
+                      color: yellowText),
+                  height: 220,
+                );
+              }
+              if (state.status == Status.loaded) {
+                return Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: yellowText),
+                  height: 220,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: CachedNetworkImage(
+                      width: double.infinity,
+                      imageUrl: state.url,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              } else {
+                return Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(32),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: yellowText),
+                  child: Center(
+                    child: (Container(
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
+                      width: 80,
+                      height: 80,
+                    )),
+                  ),
+                  height: 220,
+                );
+              }
+            },
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
@@ -57,6 +100,7 @@ class _AIPromptState extends State<AIPrompt> {
                       Container(
                         height: 48,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
                                 child: TextField(
@@ -88,7 +132,14 @@ class _AIPromptState extends State<AIPrompt> {
                                         MaterialStatePropertyAll(yellowText),
                                     foregroundColor:
                                         MaterialStatePropertyAll(Colors.white)),
-                                onPressed: () => {},
+                                onPressed: () => {
+                                      if (controller.value.text.isNotEmpty)
+                                        {
+                                          context.read<UploadCubit>().getUrl(
+                                              controller.value.text.trim()),
+                                          controller.clear()
+                                        }
+                                    },
                                 icon: Icon(CupertinoIcons.arrow_right))
                           ],
                         ),

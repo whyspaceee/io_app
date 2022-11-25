@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:app_io/data/models/entity_model.dart';
 import 'package:app_io/presentation/home_screen/components/button.dart';
 import 'package:app_io/scheme/colorscheme.dart';
+import 'package:app_io/utils/string_extension.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class FFListCard extends StatelessWidget {
@@ -25,9 +26,10 @@ class FFListCard extends StatelessWidget {
         children: [
           AspectRatio(
             aspectRatio: 1,
-            child: Container(
-                decoration: BoxDecoration(
-                    color: color, borderRadius: BorderRadius.circular(20))),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: CachedNetworkImage(
+                    imageUrl: model.photoUrl!, fit: BoxFit.cover)),
           ),
           SizedBox(width: 16),
           Expanded(
@@ -35,7 +37,7 @@ class FFListCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                model.name!,
+                model.name!.capitalize(),
                 style: TextStyle(
                     overflow: TextOverflow.ellipsis,
                     fontSize: 24,
