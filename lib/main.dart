@@ -2,8 +2,6 @@
 
 import 'package:app_io/data/repository/firestore_repository.dart';
 import 'package:app_io/logic/cubit/firebase_cubit.dart';
-import 'package:app_io/presentation/flora_fauna_screen/flora_screen.dart';
-import 'package:app_io/presentation/home_screen/home_screen.dart';
 import 'package:app_io/presentation/main_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

@@ -1,14 +1,13 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app_io/logic/cubit/firebase_cubit.dart';
+import 'package:app_io/logic/cubit/flora_search_cubit.dart';
 import 'package:app_io/presentation/flora_fauna_screen/components/card.dart';
 import 'package:app_io/presentation/flora_fauna_screen/components/search_bar.dart';
 import 'package:app_io/presentation/flora_fauna_screen/components/title.dart';
-import 'package:app_io/presentation/home_screen/home_screen.dart';
 import 'package:app_io/scheme/colorscheme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class FloraScreen extends StatefulWidget {
   const FloraScreen({super.key});
@@ -30,9 +29,13 @@ class _FloraScreenState extends State<FloraScreen> {
         SizedBox(
           height: 24,
         ),
-        SearchBar(color: green),
+        SearchBar(
+            controller: TextEditingController(),
+            color: green,
+            onChanged: (p0) =>
+                context.read<FloraSearchCubit>().searchFlora(p0)),
         SizedBox(height: 16),
-        BlocBuilder<FirestoreCubit, FirebaseCubitState>(
+        BlocBuilder<FloraSearchCubit, FloraSearchState>(
           builder: (context, state) {
             return ListView.builder(
                 physics: NeverScrollableScrollPhysics(),

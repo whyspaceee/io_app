@@ -32,6 +32,16 @@ final faunaGradient = LinearGradient(
   ],
 );
 
+final uploadGradient = LinearGradient(
+  stops: List.generate(2, (index) => index * 0.8),
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [
+    Color.fromARGB(255, 255, 231, 157),
+    Color.fromARGB(255, 241, 241, 241)
+  ],
+);
+
 final survivalGradient = LinearGradient(
   stops: List.generate(2, (index) => index * 1),
   begin: Alignment.topRight,
@@ -68,6 +78,8 @@ final red = Color.fromARGB(255, 235, 106, 106);
 final yellow = Color.fromARGB(255, 252, 209, 54);
 
 final green = Color.fromARGB(255, 183, 215, 115);
+
+final yellowText = Color.fromARGB(255, 203, 152, 0);
 
 final boxShadow = BoxShadow(
     color: Color.fromARGB(36, 0, 0, 0), offset: Offset(0, 7), blurRadius: 15);

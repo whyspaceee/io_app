@@ -1,9 +1,16 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:animations/animations.dart';
+import 'package:app_io/logic/cubit/fauna_search_cubit.dart';
+import 'package:app_io/logic/cubit/firebase_cubit.dart';
+import 'package:app_io/logic/cubit/flora_search_cubit.dart';
+import 'package:app_io/presentation/contribute_screen/contribute_screen.dart';
 import 'package:app_io/presentation/flora_fauna_screen/fauna_screen.dart';
 import 'package:app_io/presentation/flora_fauna_screen/flora_screen.dart';
 import 'package:app_io/presentation/home_screen/home_screen.dart';
 import 'package:app_io/scheme/colorscheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class MainScreen extends StatefulWidget {
@@ -15,12 +22,24 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  List<Widget> _widgetOptions = <Widget>[
+  final List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    FloraScreen(),
-    FaunaScreen()
+    BlocProvider(
+      create: (_) => FloraSearchCubit(_.read<FirestoreCubit>()),
+      child: FloraScreen(),
+    ),
+    BlocProvider(
+      create: (__) => FaunaSearchCubit(__.read<FirestoreCubit>()),
+      child: FaunaScreen(),
+    ),
+    ContributeScreen()
   ];
-  List _backgroundColor = [backgroundGradient, floraGradient, faunaGradient];
+  final List _backgroundColor = [
+    backgroundGradient,
+    floraGradient,
+    faunaGradient,
+    uploadGradient
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
                   SalomonBottomBarItem(
                       icon: Icon(Icons.add),
                       title: Text('Upload'),
-                      selectedColor: yellow)
+                      selectedColor: yellowText)
                 ]),
           ),
           backgroundColor: Colors.transparent,

@@ -1,13 +1,22 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:app_io/scheme/colorscheme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatelessWidget {
+class SearchBar extends StatefulWidget {
+  final TextEditingController controller;
+  final void Function(String) onChanged;
   final Color color;
-  const SearchBar({super.key, required this.color});
+  const SearchBar(
+      {super.key,
+      required this.color,
+      required this.onChanged,
+      required this.controller});
 
+  @override
+  State<SearchBar> createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,6 +26,7 @@ class SearchBar extends StatelessWidget {
         children: [
           Expanded(
               child: TextField(
+            onChanged: widget.onChanged,
             decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -35,13 +45,14 @@ class SearchBar extends StatelessWidget {
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20))),
                   fixedSize: MaterialStatePropertyAll(Size(64, 64)),
-                  backgroundColor: MaterialStatePropertyAll(color),
+                  backgroundColor: MaterialStatePropertyAll(widget.color),
                   foregroundColor: MaterialStatePropertyAll(Colors.white)),
               onPressed: () => {},
-              icon: Icon(Icons.search))
+              icon: widget.controller.value.text.isEmpty
+                  ? Icon(Icons.search)
+                  : Icon(Icons.cancel))
         ],
       ),
     );
-    ;
   }
 }

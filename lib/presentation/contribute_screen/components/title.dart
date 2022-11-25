@@ -1,11 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:app_io/scheme/colorscheme.dart';
 import 'package:flutter/material.dart';
 
-class FFTitle extends StatelessWidget {
-  final String title;
-  const FFTitle({super.key, required this.title});
+class ContributeTitle extends StatelessWidget {
+  const ContributeTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +16,11 @@ class FFTitle extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                'Contribute to Crux!',
                 style: TextStyle(
                     fontSize: 32, color: darkBlue, fontWeight: FontWeight.w900),
               ),
-              Text('Here are some of the $title at Crux!',
+              Text('Upload flora and fauna that you have found',
                   style: TextStyle(
                       fontSize: 14, fontWeight: FontWeight.w400, color: grey)),
             ],

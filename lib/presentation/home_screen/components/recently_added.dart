@@ -1,4 +1,3 @@
-import 'package:app_io/presentation/home_screen/components/florafauna_card.dart';
 import 'package:app_io/scheme/colorscheme.dart';
 import 'package:flutter/material.dart';
 

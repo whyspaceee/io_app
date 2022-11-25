@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app_io/data/models/entity_model.dart';
 import 'package:app_io/presentation/home_screen/components/button.dart';
 import 'package:app_io/scheme/colorscheme.dart';
@@ -15,7 +17,9 @@ class FFListCard extends StatelessWidget {
       margin: EdgeInsets.only(left: 16, right: 16, bottom: 16),
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

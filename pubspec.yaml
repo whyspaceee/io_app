@@ -44,6 +44,8 @@ dependencies:
   flutter_bloc: ^8.1.1
   salomon_bottom_bar: ^3.3.1
   animations: ^2.0.7
+  dio: ^4.0.6
+  firebase_storage: ^11.0.6
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +68,7 @@ flutter:
     - assets/notebook.png
     - assets/corn.png
     - assets/cactus.png
+    - assets/flowers.jpeg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -1,4 +1,3 @@
-
 import 'package:app_io/data/models/entity_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,6 +10,24 @@ class FirestoreRepository {
       _firestore.collection('flora').snapshots();
   Stream<QuerySnapshot<Map<String, dynamic>>> getFaunaStream() =>
       _firestore.collection('fauna').snapshots();
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getSearchFlora(
+      String search) async {
+    final searched = await _firestore
+        .collection('flora')
+        .where('name', isGreaterThanOrEqualTo: search)
+        .get();
+    return searched;
+  }
+
+  Future<QuerySnapshot<Map<String, dynamic>>> getSearchFauna(
+      String search) async {
+    final searched = await _firestore
+        .collection('fauna')
+        .where('name', isGreaterThanOrEqualTo: search)
+        .get();
+    return searched;
+  }
 
   Future<void> addFlora(EntityModel model) async {
     try {

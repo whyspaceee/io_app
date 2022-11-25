@@ -28,17 +28,19 @@ class FirestoreCubit extends Cubit<FirebaseCubitState> {
         floraList: state.floraList));
   }
 
-  void searchFlora(String search) async {
+  void searchFlora(String search) {
     emit(FirebaseCubitState(
         status: FirestoreStatus.loading,
         faunaList: state.faunaList,
         floraList: state.floraList));
-    final flora = await repository.getSearchFlora(search);
+    final flora = state.floraList
+        .where((element) =>
+            element.name!.toLowerCase().contains(search.toLowerCase()))
+        .toList();
     emit(FirebaseCubitState(
         status: FirestoreStatus.loaded,
         faunaList: state.faunaList,
-        floraList:
-            flora.docs.map((e) => EntityModel.fromJson(e.data())).toList()));
+        floraList: flora));
   }
 
   void searchFauna(String search) async {
@@ -46,11 +48,13 @@ class FirestoreCubit extends Cubit<FirebaseCubitState> {
         status: FirestoreStatus.loading,
         faunaList: state.faunaList,
         floraList: state.floraList));
-    final fauna = await repository.getSearchFauna(search);
+    final fauna = state.faunaList
+        .where((element) =>
+            element.name!.toLowerCase().contains(search.toLowerCase()))
+        .toList();
     emit(FirebaseCubitState(
         status: FirestoreStatus.loaded,
-        faunaList:
-            fauna.docs.map((e) => EntityModel.fromJson(e.data())).toList(),
+        faunaList: fauna,
         floraList: state.floraList));
   }
 
