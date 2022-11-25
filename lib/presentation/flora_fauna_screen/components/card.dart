@@ -44,9 +44,12 @@ class FFListCard extends StatelessWidget {
                     color: darkBlue,
                     fontWeight: FontWeight.w900),
               ),
-              Text('Uses',
+              Text(model.uses!.capitalize(),
                   style: TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.w400, color: color)),
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: color)),
               SizedBox(
                 height: 4,
               ),

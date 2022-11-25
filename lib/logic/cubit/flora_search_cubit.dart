@@ -8,11 +8,7 @@ part 'flora_search_state.dart';
 class FloraSearchCubit extends Cubit<FloraSearchState> {
   final FirestoreCubit _firestoreCubit;
   FloraSearchCubit(this._firestoreCubit)
-      : super(FloraSearchState(floraList: _firestoreCubit.state.floraList)) {
-    _firestoreCubit.stream.listen((state) {
-      emit(FloraSearchState(floraList: state.floraList));
-    });
-  }
+      : super(FloraSearchState(floraList: _firestoreCubit.state.floraList));
 
   void searchFlora(String search) {
     final flora = _firestoreCubit.state.floraList

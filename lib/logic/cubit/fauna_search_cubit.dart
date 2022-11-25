@@ -8,12 +8,7 @@ part 'fauna_search_state.dart';
 class FaunaSearchCubit extends Cubit<FaunaSearchState> {
   final FirestoreCubit _firestoreCubit;
   FaunaSearchCubit(this._firestoreCubit)
-      : super(FaunaSearchState(faunaList: _firestoreCubit.state.faunaList)) {
-    _firestoreCubit.stream.listen((state) {
-      emit(FaunaSearchState(faunaList: state.faunaList));
-    });
-  }
-
+      : super(FaunaSearchState(faunaList: _firestoreCubit.state.faunaList));
   void searchFauna(String search) {
     final fauna = _firestoreCubit.state.faunaList
         .where((element) =>

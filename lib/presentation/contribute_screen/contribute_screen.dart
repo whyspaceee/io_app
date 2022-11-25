@@ -3,6 +3,7 @@
 import 'dart:ui';
 
 import 'package:app_io/presentation/contribute_screen/components/aiprompt.dart';
+import 'package:app_io/presentation/contribute_screen/components/forms.dart';
 import 'package:app_io/presentation/contribute_screen/components/steps.dart';
 import 'package:app_io/presentation/contribute_screen/components/title.dart';
 import 'package:app_io/presentation/flora_fauna_screen/components/search_bar.dart';
@@ -48,7 +49,12 @@ class _ContributeScreenState extends State<ContributeScreen> {
               ),
             ],
           ),
-          AIPrompt()
+          AIPrompt(),
+          SizedBox(
+            height: 32,
+          ),
+          StepsText(text: 'Step 2 - Enter Details'),
+          UploadForms()
         ]),
       ),
     );

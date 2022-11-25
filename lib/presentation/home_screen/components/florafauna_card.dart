@@ -3,6 +3,7 @@
 import 'package:app_io/data/models/entity_model.dart';
 import 'package:app_io/scheme/colorscheme.dart';
 import 'package:app_io/utils/string_extension.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class FloraFaunaCard extends StatelessWidget {
@@ -43,10 +44,12 @@ class FloraFaunaCard extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   color: yellow,
-                  image: DecorationImage(image: asset.image)),
+                  image: DecorationImage(
+                      image: CachedNetworkImageProvider(model.photoUrl!),
+                      fit: BoxFit.cover)),
             ),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 14),
           Text(
             model.name!.capitalize(),
             style: TextStyle(

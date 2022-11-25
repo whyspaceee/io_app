@@ -9,6 +9,7 @@ final floraFaunaList = BlocBuilder<FirestoreCubit, FirebaseCubitState>(
   builder: (context, state) {
     if (state.status == FirestoreStatus.loaded) {
       final combined = state.faunaList + state.floraList;
+      combined.shuffle();
       return Container(
         margin: EdgeInsets.only(left: 16),
         height: 330,

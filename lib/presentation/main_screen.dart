@@ -6,6 +6,7 @@ import 'package:app_io/logic/cubit/fauna_search_cubit.dart';
 import 'package:app_io/logic/cubit/firebase_cubit.dart';
 import 'package:app_io/logic/cubit/flora_search_cubit.dart';
 import 'package:app_io/logic/cubit/upload_cubit.dart';
+import 'package:app_io/logic/forms/submitformbloc.dart';
 import 'package:app_io/presentation/contribute_screen/contribute_screen.dart';
 import 'package:app_io/presentation/flora_fauna_screen/fauna_screen.dart';
 import 'package:app_io/presentation/flora_fauna_screen/flora_screen.dart';
@@ -34,8 +35,16 @@ class _MainScreenState extends State<MainScreen> {
       create: (__) => FaunaSearchCubit(__.read<FirestoreCubit>()),
       child: FaunaScreen(),
     ),
-    BlocProvider(
-      create: (context) => UploadCubit(ApiProvider()),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => UploadCubit(ApiProvider()),
+        ),
+        BlocProvider(
+          create: (_) =>
+              SubmitFormBloc(_.read<FirestoreCubit>(), _.read<UploadCubit>()),
+        ),
+      ],
       child: ContributeScreen(),
     )
   ];
